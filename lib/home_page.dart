@@ -12,9 +12,9 @@ class HomePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _navi = useValueNotifier(_router.navigator);
+    final _navi = useState(_router.navigator.currentRoute.name);
     // ignore: avoid_print
-    print(_navi.value.currentRoute.name);
+    print(_navi.value);
 
     return Scaffold(
       appBar: AppBar(
@@ -42,7 +42,10 @@ class HomePage extends HookWidget {
         ],
         currentIndex: AppRouter.tabs
             .indexWhere((element) => element == _router.routeName),
-        onTap: (v) => QR.toName(AppRouter.tabs[v]),
+        onTap: (v) {
+          _navi.value = AppRouter.tabs[v];
+          QR.toName(_navi.value!);
+        },
       ),
     );
   }
