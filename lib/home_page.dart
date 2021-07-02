@@ -12,9 +12,9 @@ class HomePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _navi = useListenable(_router.navigator);
+    final _navi = useValueNotifier(_router.navigator);
     // ignore: avoid_print
-    print(_navi.currentRoute.name);
+    print(_navi.value.currentRoute.name);
 
     return Scaffold(
       appBar: AppBar(
